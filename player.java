@@ -1,23 +1,27 @@
 public class Player {
-    private int id;
-    private String name;
-    private double x;
-    private double y;
-    private boolean isShooting;
+    // Existing fields omitted for brevity
+    private int currentWeaponIndex;
+    private List<Weapon> weapons;
 
     public Player(int id, String name, double x, double y) {
-        this.id = id;
-        this.name = name;
-        this.x = x;
-        this.y = y;
-        this.isShooting = false;
+        // Existing constructor code omitted for brevity
+        this.currentWeaponIndex = 0;
+        this.weapons = new ArrayList<>();
+        this.weapons.add(new Pistol());
+        this.weapons.add(new Shotgun());
+        this.weapons.add(new RocketLauncher());
     }
 
-    // Getters and setters omitted for brevity
+    public Weapon getCurrentWeapon() {
+        return weapons.get(currentWeaponIndex);
+    }
 
-    public void update(double x, double y, boolean isShooting) {
-        this.x = x;
-        this.y = y;
-        this.isShooting = isShooting;
+    public void nextWeapon() {
+        currentWeaponIndex = (currentWeaponIndex + 1) % weapons.size();
+    }
+
+    public void previousWeapon() {
+        currentWeaponIndex = (currentWeaponIndex - 1 + weapons.size()) % weapons.size();
     }
 }
+
