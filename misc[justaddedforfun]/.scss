@@ -1,0 +1,36 @@
+import java.util.Random;
+
+public class SimpleAI {
+    private float[] position;
+    private float speed;
+    private Random random;
+    
+    public SimpleAI(float x, float y, float z, float speed) {
+        this.position = new float[] {x, y, z};
+        this.speed = speed;
+        this.random = new Random();
+    }
+    
+    public void update() {
+        // Generate a random movement vector
+        float[] movement = generateRandomMovement();
+        
+        // Apply the movement to the AI's position
+        position[0] += movement[0] * speed;
+        position[1] += movement[1] * speed;
+        position[2] += movement[2] * speed;
+    }
+    
+    private float[] generateRandomMovement() {
+        // Define a set of valid movements
+        float[][] movements = new float[][] {
+            {1, 0, 0}, {-1, 0, 0},
+            {0, 1, 0}, {0, -1, 0},
+            {0, 0, 1}, {0, 0, -1}
+        };
+        
+        // Generate a random movement from the set of valid movements
+        int index = random.nextInt(movements.length);
+        return movements[index];
+    }
+}
